@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Counter Generator for The Fantasy Trip</title>
+    </head>
+    
+    <script>
+    
+//        Establish Variables
+        
+        function initializeApp() {
+        
+         
+            
+        }
+        
+        function hideHelp(){
+            
+            document.getElementById("helpDiv").style.display="none";
+            
+        }
+        
+        function loadImage () {
+            
+            scaleValue = document.getElementById("scaleSelect").value;
+            
+            URLarray = document.getElementById("urlBox").value.split("\n");
+            
+            sheetString="";
+            
+            for ( i=0; i<URLarray.length; i++ ) {
+                
+                if ( validURL( URLarray[i].trim() ) ) {
+
+                    sheetString += "<div style='position: relative; border: solid thin; height: " + (100*scaleValue) + "px; width: " + (100*scaleValue) + "px;'>"
+                    
+                    sheetString +=  "<img src='";
+
+                    sheetString +=  URLarray[i].trim();
+
+                    sheetString += "' style='max-height: " + (80*scaleValue) + "px; max-width: " + (80*scaleValue) + "px; position: absolute; top: " + (10*scaleValue) + "px; right: " + (10*scaleValue) + "px; z-index: -1'>";
+                    
+                    sheetString += "<div style='position: absolute; bottom: " + (7*scaleValue) + "px; left: " + (7*scaleValue) + "px; font-size: " + (20*scaleValue) + "px; font-weight: bold;'>" + "ABCDEFGHJKMNPQRSTUVWXYZ".substr(Math.floor(Math.random()*24),1) + "</div>"
+                    
+                    sheetString += "</div>"
+
+                }
+            }
+            
+            
+            document.getElementById("destinationDiv").innerHTML = sheetString;
+
+        }
+        
+        function validURL(str) {
+          var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+            '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+            '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+          return !!pattern.test(str);
+        }
+
+        
+    </script>
+
+    <style>
+        
+        .niftyButton {
+            border: solid thin;
+            margin: 0.5vh;
+            border-radius: 10px;
+            padding: 0.25vh 1vh;
+            text-align: center;
+            box-shadow: 0.2vh 0.4vh;
+
+        }
+        
+//             https://dragon-quest.org/images/1/1b/DQIII_Skeleton_Swordsman.png
+
+    </style>
+        
+    <body onLoad="initializeApp()" onClick="" style = "overflow: scroll;">
+        
+        <h2>Counter Generator for The Fantasy Trip</h2>
+        
+        <p>
+        Surf the net, find some pictures you think would make nifty counters. Paste the URLs into the box below, one to a line. Press the button, boom, counters. If they don't print to quite the right size adjust the scale in your Print dialog box. If you are graphically handy you can use a larger scale, do a screencap, then manipulate them to print at the correct size and possibly get better resolution.
+        </p>
+        
+        Scale:
+        <select id="scaleSelect">
+            <option value=1>1x</option>
+            <option value=2>2x</option>
+            <option value=3>3x</option>
+            <option value=4>4x</option>
+        </select>
+        
+        <br><br>
+        
+        <span class="niftyButton" style=' ' onclick="loadImage();">Create Counters</span>
+
+        <br><br>
+
+        <textarea rows="3" style="font-size:2vh; width: 90%; height: 10vh; " id="urlBox">
+                
+            Paste the URLs here, one to a line
+        
+        </textarea>
+        
+        
+
+        
+        <div id="destinationDiv" style="display: flex; flex-wrap: wrap;">
+        </div>
+        
+        <br>
+        
+
+        <div id="helpDiv" onclick="hideHelp();" style="display: none; position: fixed; top: 20%; bottom: 20%; left: 20%; right: 20%; border: solid thick; background-color: BlanchedAlmond; color:SaddleBrown; padding: 3.5vh; overflow: auto; z-index: 999;"> 
+        
+            <p>
+                Thanks for trying out Exciting Web App. Have fun! 
+            </p>
+        </div>
+       
+      
+    </body>
+
+   
+</html>
+
